@@ -1,2 +1,2 @@
-# DSA
-Implementation Of Data Structure and Algorithms
+# Data Structures And Algorithms
+Implementation Of Data Structures and Algorithms
