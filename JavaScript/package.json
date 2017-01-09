@@ -1,0 +1,15 @@
+{
+  "name": "js-dsa",
+  "version": "1.0.0",
+  "description": "JavaScript implementation of data structures and algorithms",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha Unit_Tests/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
