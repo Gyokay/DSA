@@ -1,18 +1,14 @@
 'use strict'
 
-function binarySearch (arr, leftmostIndex, rightmostIndex, x) {
-	if (leftmostIndex > rightmostIndex) {
-		return -1
-	} else {
-		let midIndex = leftmostIndex + (rightmostIndex - leftmostIndex) / 2
+function binarySearch (arr, leftIndex, rightIndex, targetValue) {
+	if (leftIndex > rightIndex) return -1
 
-		if (arr[midIndex] === x) {
-			return midIndex
-		} else if (arr[midIndex] > x) {
-			return binarySearch(arr, leftmostIndex, midInex - 1, x)
-		} else {
-			return binarySearch(arr, midIndex + 1, rightmostIndex, x)
-		}
-	}
+	let midIndex = Math.floor((leftIndex + rightIndex) / 2)
+
+	if (arr[midIndex] === targetValue) return midIndex
+
+	if (arr[midIndex] < targetValue) return binarySearch(arr, midIndex + 1, rightIndex, targetValue)
+	if (arr[midIndex] > targetValue) return binarySearch(arr, leftIndex, midIndex - 1, targetValue)
 }
 
+module.exports = binarySearch
