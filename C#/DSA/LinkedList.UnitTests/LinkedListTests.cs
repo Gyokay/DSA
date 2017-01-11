@@ -64,7 +64,7 @@ namespace LinkedList.UnitTests
             var list = new LinkedList<int>();
 
             list.Add(1);
-          
+
             const int expectedLength = 1;
             var actualLength = list.Length();
 
@@ -72,7 +72,7 @@ namespace LinkedList.UnitTests
         }
 
         [Test]
-        public void Length_AddOddNumberOfElements_ShouldReturnCorrectLength()
+        public void Length_OddNumberOfElements_ShouldReturnCorrectLength()
         {
             var list = new LinkedList<int>();
 
@@ -87,7 +87,7 @@ namespace LinkedList.UnitTests
         }
 
         [Test]
-        public void Length_AddEvenNumberOfElements_ShouldReturnCorrectLength()
+        public void Length_EvenNumberOfElements_ShouldReturnCorrectLength()
         {
             var list = new LinkedList<int>();
 
@@ -100,6 +100,142 @@ namespace LinkedList.UnitTests
             var actualLength = list.Length();
 
             Assert.AreEqual(expectedLength, actualLength);
+        }
+
+        [Test]
+        public void Prepend_ShouldReplaceHeadNode()
+        {
+            var list = new LinkedList<string>();
+
+            var expectedStrings = new string[] { "foo", "bar", "baz" };
+
+            list.Add(expectedStrings[0]);
+            list.Add(expectedStrings[1]);
+            list.Prepend(expectedStrings[2]);
+
+            Assert.AreEqual(expectedStrings[2], list.Head.Data);
+            Assert.AreEqual(expectedStrings[0], list.Head.Next.Data);
+            Assert.AreEqual(expectedStrings[1], list.Head.Next.Next.Data);
+        }
+
+        [Test]
+        public void InsertAfter_EmptyArr_ShouldNotInsert()
+        {
+            var list = new LinkedList<string>();
+
+            list.InsertAfter("foo", "bar");
+            const int expectedLength = 0;
+
+            Assert.AreEqual(expectedLength, list.Length());
+        }
+
+        [Test]
+        public void InsertAfter_OneElement_ShouldInsert()
+        {
+            var list = new LinkedList<string>();
+
+            const string expectedString = "bar";
+            const int expectedLength = 2;
+
+            list.Add("foo");
+            list.InsertAfter("foo", expectedString);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedString, list.Head.Next.Data);
+        }
+
+        [Test]
+        public void InsertAfter_BetweenTwoNodes_ShouldInsert()
+        {
+            var list = new LinkedList<string>();
+            var expectedStrings = new string[] { "foo", "bar", "baz" };
+            const int expectedLength = 3;
+
+            list.Add(expectedStrings[0]);
+            list.Add(expectedStrings[1]);
+            list.InsertAfter("foo", expectedStrings[2]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedStrings[0], list.Head.Data);
+            Assert.AreEqual(expectedStrings[2], list.Head.Next.Data);
+            Assert.AreEqual(expectedStrings[1], list.Head.Next.Next.Data);
+        }
+
+        [Test]
+        public void InsertAfter_NonExistantKey_ShouldNotInsert()
+        {
+            var list = new LinkedList<int>();
+            var expectedNumbers = new int[] { 1, 2, 3 };
+            var expectedLength = 2;
+
+            list.Add(expectedNumbers[0]);
+            list.Add(expectedNumbers[1]);
+            list.InsertAfter(expectedNumbers[2], expectedNumbers[2]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedNumbers[0], list.Head.Data);
+            Assert.AreEqual(expectedNumbers[1], list.Head.Next.Data);
+        }
+
+        [Test]
+        public void InsertBefore_EmptyArr_ShouldNotInsert()
+        {
+            var list = new LinkedList<string>();
+
+            list.InsertBefore("foo", "bar");
+            const int expectedLength = 0;
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(null, list.Head);
+        }
+
+        [Test]
+        public void InsertBefore_OneElement_ShouldInsert()
+        {
+            var list = new LinkedList<string>();
+
+            var expectedStrings = new string[] { "foo", "bar" };
+            const int expectedLength = 2;
+
+            list.Add(expectedStrings[0]);
+            list.InsertBefore(expectedStrings[0], expectedStrings[1]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedStrings[1], list.Head.Data);
+            Assert.AreEqual(expectedStrings[0], list.Head.Next.Data);
+        }
+
+        [Test]
+        public void InsertBefore_BetweenTwoNodes_ShouldInsert()
+        {
+            var list = new LinkedList<string>();
+            var expectedStrings = new string[] { "foo", "bar", "baz" };
+            const int expectedLength = 3;
+
+            list.Add(expectedStrings[0]);
+            list.Add(expectedStrings[1]);
+            list.InsertBefore(expectedStrings[1], expectedStrings[2]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedStrings[0], list.Head.Data);
+            Assert.AreEqual(expectedStrings[2], list.Head.Next.Data);
+            Assert.AreEqual(expectedStrings[1], list.Head.Next.Next.Data);
+        }
+
+        [Test]
+        public void InsertBefore_NonExistantKey_ShouldNotInsert()
+        {
+            var list = new LinkedList<int>();
+            var expectedNumbers = new int[] { 1, 2, 3 };
+            var expectedLength = 2;
+
+            list.Add(expectedNumbers[0]);
+            list.Add(expectedNumbers[1]);
+            list.InsertBefore(expectedNumbers[2], expectedNumbers[2]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedNumbers[0], list.Head.Data);
+            Assert.AreEqual(expectedNumbers[1], list.Head.Next.Data);
         }
     }
 }
