@@ -237,5 +237,73 @@ namespace LinkedList.UnitTests
             Assert.AreEqual(expectedNumbers[0], list.Head.Data);
             Assert.AreEqual(expectedNumbers[1], list.Head.Next.Data);
         }
+
+        [Test]
+        public void Delete_SingleElement_ShouldEmptyList()
+        {
+            var list = new LinkedList<string>();
+            const string expectedString = "foo";
+            const int expectedLength = 0;
+
+
+            list.Add(expectedString);
+            list.Delete(expectedString);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(null, list.Head);
+        }
+
+        [Test]
+        public void Delete_LastElement_ShouldDeleteCorrectly()
+        {
+            var list = new LinkedList<string>();
+            var expectedStrings = new string[] { "foo", "bar" };
+
+            const int expectedLength = 1;
+
+
+            list.Add(expectedStrings[0]);
+            list.Add(expectedStrings[1]);
+            list.Delete(expectedStrings[1]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedStrings[0], list.Head.Data);
+            Assert.AreEqual(null, list.Head.Next);
+        }
+
+        [Test]
+        public void Delete_MiddElement_ShouldDeleteCorrectly()
+        {
+            var list = new LinkedList<string>();
+            var expectedStrings = new string[] { "foo", "bar", "baz" };
+
+            const int expectedLength = 2;
+
+            list.Add(expectedStrings[0]);
+            list.Add(expectedStrings[1]);
+            list.Add(expectedStrings[2]);
+            list.Delete(expectedStrings[1]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedStrings[0], list.Head.Data);
+            Assert.AreEqual(expectedStrings[2], list.Head.Next.Data);
+        }
+
+        [Test]
+        public void Delete_FirstElementOfTwo_ShouldDeleteCorrectly()
+        {
+            var list = new LinkedList<string>();
+            var expectedStrings = new string[] { "foo", "bar"};
+
+            const int expectedLength = 1;
+
+            list.Add(expectedStrings[0]);
+            list.Add(expectedStrings[1]);
+            list.Delete(expectedStrings[0]);
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(expectedStrings[1], list.Head.Data);
+            Assert.AreEqual(null, list.Head.Next);
+        }
     }
 }
