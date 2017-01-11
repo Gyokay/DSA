@@ -112,7 +112,7 @@ namespace LinkedList
 
         public void Delete(T key)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void Print()
