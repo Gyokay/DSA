@@ -107,12 +107,45 @@ namespace LinkedList
                 newNode.Next = currentNode;
                 previousNode.Next = newNode;
             }
-
         }
 
         public void Delete(T key)
         {
-            throw new NotImplementedException();
+            var currentNode = this.head;
+            INode<T> previousNode = null;
+
+            while (currentNode != null && currentNode.Data.CompareTo(key) != 0)
+            {
+                previousNode = currentNode;
+                currentNode = previousNode.Next;
+            }
+
+            if (currentNode != null)
+            {
+                if (previousNode != null && currentNode.Next != null)
+                {
+                    previousNode.Next = currentNode.Next;
+                    return;
+                }
+
+                if (previousNode == null && currentNode.Next != null)
+                {
+                    this.head = currentNode.Next;
+                    return;
+                }
+
+                if (previousNode != null && currentNode.Next == null)
+                {
+                    previousNode.Next = null;
+                    return;
+                }
+
+                if (previousNode == null && currentNode.Next == null)
+                {
+                    this.head = null;
+                    return;
+                }
+            }
         }
 
         public void Print()
