@@ -3,7 +3,7 @@ using System;
 
 namespace LinkedList
 {
-    public class LinkedList<T> where T : IComparable
+    public class LinkedList<T> : ILinkedList<T> where T : IComparable
     {
         private INode<T> head;
 
@@ -146,6 +146,32 @@ namespace LinkedList
                     return;
                 }
             }
+        }
+
+        public T RemoveLast()
+        {
+            if (this.head == null)
+            {
+                throw new InvalidOperationException("List is empty");
+            }
+
+            var currentNode = this.head;
+            INode<T> previousNode = null;
+
+            while (currentNode.Next != null)
+            {
+                previousNode = currentNode;
+                currentNode = currentNode.Next;
+            }
+
+            if (previousNode == null)
+            {
+                try { return this.head.Data; }
+                finally { this.head = null; }
+            }
+
+            try { return currentNode.Data; }
+            finally { previousNode.Next = null; }
         }
 
         public void Print()

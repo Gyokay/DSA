@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ILinkedList.cs" />
     <Compile Include="Contracts\INode.cs" />
     <Compile Include="LinkedList.cs" />
     <Compile Include="Node.cs" />
