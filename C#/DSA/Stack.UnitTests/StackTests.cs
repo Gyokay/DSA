@@ -125,7 +125,5 @@ namespace Stack.UnitTests
 
             Assert.AreEqual(theMeaningOfLife, stack.Pop());
         }
-
-        [Test]
     }
 }
