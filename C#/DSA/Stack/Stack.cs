@@ -3,7 +3,7 @@ using Stack.Contracts;
 
 namespace Stack
 {
-    public class Stack<T> : IStack<T>
+    public class Stack<T> : IStackable<T>
     {
         private T[] stack;
         private int topIndex;

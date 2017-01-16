@@ -1,6 +1,6 @@
 ﻿namespace Stack.Contracts
 {
-    public interface IStack<T>
+    public interface IStackable<T>
     {
         void Push(T data);
 
