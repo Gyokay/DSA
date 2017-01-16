@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace LinkedList.UnitTests
 {
@@ -304,6 +305,71 @@ namespace LinkedList.UnitTests
             Assert.AreEqual(expectedLength, list.Length());
             Assert.AreEqual(expectedStrings[1], list.Head.Data);
             Assert.AreEqual(null, list.Head.Next);
+        }
+
+        [Test]
+        public void RemoveLast_OneElement_ShouldRemoveLastElement()
+        {
+            const int expectedLength = 0;
+            var list = new LinkedList<int>();
+
+            list.Add(1);
+            list.RemoveLast();
+
+            Assert.AreEqual(expectedLength, list.Length());
+        }
+
+        [Test]
+        public void RemoveLast_OddNumberOfElements_ShouldRemoveCorrectly()
+        {
+            const int expectedLength = 1;
+            var list = new LinkedList<string>();
+            var elements = new string[] { "foo", "bar", "baz" };
+
+            for (int i = 0; i < elements.Length; i++)
+            {
+                list.Add(elements[i]);
+            }
+
+            list.RemoveLast();
+            list.RemoveLast();
+
+            Assert.AreEqual(expectedLength, list.Length());
+            Assert.AreEqual(null, list.Head.Next);
+        }
+
+        [Test]
+        public void RemoveLast_EmptyList_ShouldThrowWithCorrectMessage()
+        {
+            var list = new LinkedList<string>();
+
+            Assert.Throws<InvalidOperationException>(() => list.RemoveLast(), "List is empty");
+        }
+
+        [Test]
+        public void RemoveLast_SingleElementList_ShouldReturnRemovedValue()
+        {
+            var list = new LinkedList<int>();
+            const int expectedNumber = 42;
+
+            list.Add(expectedNumber);
+
+            Assert.AreEqual(expectedNumber, list.RemoveLast());
+        }
+
+        [Test]
+        public void RemoveLast_MultipleElementsList_ShouldReturnRemovedValue()
+        {
+            var list = new LinkedList<string>();
+            var elements = new string[] { "foo", "bar", "baz" };
+
+            for (int i = 0; i < elements.Length; i++)
+            {
+                list.Add(elements[i]);
+            }
+
+            Assert.AreEqual(elements[2], list.RemoveLast());
+            Assert.AreEqual(elements[1], list.RemoveLast());
         }
     }
 }
